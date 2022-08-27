@@ -1,0 +1,255 @@
+<template>
+  <v-card height="450">
+    <v-card-text>
+      <template v-if="sticker.uploaded && sticker.unlocked">
+        <div
+          class="text-center"
+        >
+          <h4 class="fs--18 fw--300">
+            Long Sticker
+          </h4>
+          <h4 class="fs--18 fw--300">
+            Name
+          </h4>
+        </div>
+        <div class="text-center">
+          <img
+            width="120"
+            src="@/assets/images/boom.png"
+          />
+        </div>
+        <div class="d-flex justify-space-between align-center">
+          <span class="fs--14 fw--500 mt-2">
+            Enable:
+          </span>
+          <v-switch
+            hide-details
+            small
+            color="pink"
+          ></v-switch>
+        </div>
+
+        <v-row
+          align="center"
+          no-gutters
+        >
+          <v-col
+            cols="5"
+            md="5"
+            xl="4"
+          >
+            <span class="fs--14 fw--500">Stickiness: </span>
+          </v-col>
+          <v-col
+            cols="7"
+            md="7"
+            xl="8"
+            class="text-right"
+          >
+            <v-slider
+              color="pink"
+              hide-details
+            ></v-slider>
+          </v-col>
+          <v-col
+            cols="5"
+            md="5"
+            xl="4"
+          >
+            <span class="fs--14 fw--500">Volume: </span>
+          </v-col>
+          <v-col
+            cols="7"
+            md="7"
+            xl="8"
+            class="text-right"
+          >
+            <v-slider
+              color="pink"
+              hide-details
+            ></v-slider>
+          </v-col>
+        </v-row>
+        <v-row
+          no-gutters
+          class="mt-3"
+          align="center"
+        >
+          <v-col
+            cols="6"
+            class="pr-1"
+          >
+            <v-btn
+              color="secondary"
+              depressed
+              block
+            >
+              Play
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="6"
+            class="pl-1"
+          >
+            <v-btn
+              depressed
+              color="secondary"
+              outlined
+              block
+            >
+              <span class="textColor--text">Replace</span>
+            </v-btn>
+          </v-col>
+        </v-row>
+        <v-row align="center">
+          <v-col
+            cols="4"
+            md="4"
+          >
+            <span class="fs--14 fw--500">Bits: </span>
+          </v-col>
+          <v-col
+            cols="8"
+            md="8"
+            class="text-right"
+          >
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="secondary"
+                  dark
+                  v-bind="attrs"
+                  class="px-7 px-xl-15"
+                  small
+                  v-on="on"
+                >
+                  {{ bits }} <v-icon>{{ arrow }}</v-icon>
+                </v-btn>
+              </template>
+              <v-list dense>
+                <v-list-item
+                  v-for="item in bitList"
+                  :key="item"
+                  @click="bits = item"
+                >
+                  <v-list-item-title>
+                    {{ item }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-col>
+        </v-row>
+        <v-row
+          no-gutters
+          class="mt-4"
+        >
+          <v-col
+            cols="10"
+            md="9"
+            class="pr-1"
+          >
+            <v-btn
+              depressed
+              color="pink"
+              block
+            >
+              <span>Replace</span>
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="2"
+            lg="3"
+            class="pl-1 text-right"
+          >
+            <v-btn
+              color="secondary"
+              depressed
+              class="white--text px-0"
+              style="min-width: 50px;"
+            >
+              <v-icon>{{ deleteIcon }}</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </template>
+      <template v-if="!sticker.uploaded && sticker.unlocked">
+        <h4 class="fs--18 fw--300 text-center">
+          Slot 3
+        </h4>
+        <div class="upload-area d-flex align-center justify-center">
+          <img
+            src="@/assets/images/add.png"
+            width="50%"
+            alt="Add"
+          >
+        </div>
+        <v-btn
+          block
+          depressed
+          color="pink"
+        >
+          <span>Upload</span>
+        </v-btn>
+      </template>
+      <template v-if="!sticker.uploaded && !sticker.unlocked">
+        <h4 class="fs--18 fw--300 text-center grey--text">
+          Slot 4
+        </h4>
+        <div class="unlock-area d-flex align-center justify-center">
+          <img
+            src="@/assets/images/icon_lock.png"
+            alt="Unlock"
+          >
+        </div>
+        <v-btn
+          block
+          depressed
+          color="purple"
+          class="py-7 text-normal"
+        >
+          <div>
+            <span class="grey--text">Unlocks at </span> <br>
+            <div class="d-flex align-center justify-center">
+              <span class="grey--text pr-2">{{ sticker.value }}</span>
+              <img
+                src="@/assets/images/bits.png"
+              />
+            </div>
+          </div>
+        </v-btn>
+      </template>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script>
+import { mdiChevronDown, mdiDelete, mdiPlus } from '@mdi/js'
+
+export default {
+  props: {
+    sticker: {
+      type: Object,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      deleteIcon: mdiDelete,
+      plusIcon: mdiPlus,
+      arrow: mdiChevronDown,
+      bits: 100,
+      bitList: [100, 150],
+    }
+  },
+}
+</script>
+
+<style scoped>
+.upload-area {
+  height: 345px;
+}
+.unlock-area {
+  height: 330px;
+}
+</style>
