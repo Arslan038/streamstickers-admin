@@ -1,9 +1,9 @@
 <template>
-  <v-card height="450">
+  <v-card height="460">
     <v-card-text>
       <template v-if="sticker.uploaded && sticker.unlocked">
         <div
-          class="text-center"
+          class="sticker-header text-center mb-3"
         >
           <h4 class="fs--18 fw--300">
             Long Sticker
@@ -11,6 +11,13 @@
           <h4 class="fs--18 fw--300">
             Name
           </h4>
+          <v-icon
+            size="36"
+            color="grey"
+            class="drag-icon"
+          >
+            {{ drag }}
+          </v-icon>
         </div>
         <div class="text-center">
           <img
@@ -48,6 +55,9 @@
           >
             <v-slider
               color="pink"
+              :min="0"
+              :max="10000"
+              thumb-label
               hide-details
             ></v-slider>
           </v-col>
@@ -66,6 +76,9 @@
           >
             <v-slider
               color="pink"
+              :min="0"
+              :max="10000"
+              thumb-label
               hide-details
             ></v-slider>
           </v-col>
@@ -83,8 +96,9 @@
               color="secondary"
               depressed
               block
+              class="grid-btn"
             >
-              Play
+              <v-icon>{{ volume }}</v-icon> Play
             </v-btn>
           </v-col>
           <v-col
@@ -96,8 +110,9 @@
               color="secondary"
               outlined
               block
+              class="grid-btn"
             >
-              <span class="textColor--text">Replace</span>
+              <v-icon>{{ volume }}</v-icon> <span class="textColor--text">Replace</span>
             </v-btn>
           </v-col>
         </v-row>
@@ -145,7 +160,7 @@
           class="mt-4"
         >
           <v-col
-            cols="10"
+            cols="9"
             md="9"
             class="pr-1"
           >
@@ -158,7 +173,7 @@
             </v-btn>
           </v-col>
           <v-col
-            cols="2"
+            cols="3"
             lg="3"
             class="pl-1 text-right"
           >
@@ -166,7 +181,7 @@
               color="secondary"
               depressed
               class="white--text px-0"
-              style="min-width: 50px;"
+              style="min-width: 50px"
             >
               <v-icon>{{ deleteIcon }}</v-icon>
             </v-btn>
@@ -174,15 +189,37 @@
         </v-row>
       </template>
       <template v-if="!sticker.uploaded && sticker.unlocked">
-        <h4 class="fs--18 fw--300 text-center">
-          Slot 3
-        </h4>
+        <div
+          class="sticker-header text-center mb-3"
+        >
+          <h4 class="fs--18 fw--300">
+            Slot 3
+          </h4>
+          <v-icon
+            size="36"
+            color="grey"
+            class="drag-icon"
+          >
+            {{ drag }}
+          </v-icon>
+        </div>
         <div class="upload-area d-flex align-center justify-center">
-          <img
+          <!-- <img
             src="@/assets/images/add.png"
             width="50%"
             alt="Add"
+          > -->
+          <v-btn
+            fab
+            color="pink"
+            x-large
+            width="110"
+            height="110"
           >
+            <v-icon size="34">
+              {{ plusIcon }}
+            </v-icon>
+          </v-btn>
         </div>
         <v-btn
           block
@@ -193,14 +230,39 @@
         </v-btn>
       </template>
       <template v-if="!sticker.uploaded && !sticker.unlocked">
-        <h4 class="fs--18 fw--300 text-center grey--text">
-          Slot 4
-        </h4>
+        <div
+          class="sticker-header text-center mb-3"
+        >
+          <h4 class="fs--18 fw--300">
+            Slot 4
+          </h4>
+          <v-icon
+            size="36"
+            color="grey"
+            class="drag-icon"
+          >
+            {{ drag }}
+          </v-icon>
+        </div>
         <div class="unlock-area d-flex align-center justify-center">
-          <img
+          <!-- <img
             src="@/assets/images/icon_lock.png"
             alt="Unlock"
+          > -->
+          <v-btn
+            fab
+            color="lightpurple"
+            x-large
+            width="110"
+            height="110"
           >
+            <v-icon
+              size="34"
+              color="blue"
+            >
+              {{ lock }}
+            </v-icon>
+          </v-btn>
         </div>
         <v-btn
           block
@@ -224,7 +286,7 @@
 </template>
 
 <script>
-import { mdiChevronDown, mdiDelete, mdiPlus } from '@mdi/js'
+import { mdiChevronDown, mdiDelete, mdiDrag, mdiLock, mdiPlus, mdiVolumeLow } from '@mdi/js'
 
 export default {
   props: {
@@ -238,6 +300,9 @@ export default {
       deleteIcon: mdiDelete,
       plusIcon: mdiPlus,
       arrow: mdiChevronDown,
+      volume: mdiVolumeLow,
+      lock: mdiLock,
+      drag: mdiDrag,
       bits: 100,
       bitList: [100, 150],
     }
@@ -251,5 +316,15 @@ export default {
 }
 .unlock-area {
   height: 330px;
+}
+
+.sticker-header {
+  position: relative;
+}
+
+.sticker-header .drag-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 </style>

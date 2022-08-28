@@ -45,6 +45,8 @@ const themeConfig = {
       pink: '#e7318d',
       red: '#E6346F',
       textColor: '#000000',
+      lightpurple: '#472B90',
+      blue: '#6740CD',
     },
     dark: {
       primary: '#9155FD',
@@ -60,6 +62,8 @@ const themeConfig = {
       pink: '#e7318d',
       red: '#E6346F',
       textColor: '#FFFFFF',
+      lightpurple: '#472B90',
+      blue: '#6740CD',
     },
   },
 }

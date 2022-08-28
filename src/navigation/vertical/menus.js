@@ -16,24 +16,7 @@ export default [
     iconType: 'image',
     badge: '20',
     badgeColor: 'red',
-    children: [
-      {
-        title: 'Custom',
-        to: 'stickers',
-      },
-      {
-        title: 'Reward',
-        to: 'reward-stickers',
-      },
-      {
-        title: 'Power',
-        to: 'dashboard-eCommerce',
-      },
-      {
-        title: 'Global',
-        to: 'dashboard-eCommerce',
-      },
-    ],
+    to: 'stickers',
   },
   {
     title: 'Profile',

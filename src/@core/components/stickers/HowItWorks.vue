@@ -1,12 +1,17 @@
 <template>
-  <v-card min-height="265">
+  <v-card
+    min-height="280"
+    class="character-bg"
+  >
     <v-card-text>
-      <v-row no-gutters>
+      <v-row
+        no-gutters
+      >
         <v-col
           cols="12"
           lg="8"
         >
-          <h3 class="fs--23 fw--500 white--text">
+          <h3 class="fs--23 fw--500">
             How it works
           </h3>
 
@@ -14,11 +19,13 @@
           <slot name="text" />
 
           <template v-if="!reward">
-            <h3>Unlock Slots</h3>
+            <h3 class="fs--18 fw--500">
+              Unlock Slots
+            </h3>
             <div class="d-flex justify-space-between mt-2 mb-1">
               <span class="info--text">10</span>
               <span class="info--text">75%</span>
-              <span class="white--text">15</span>
+              <span class="textColor--text">15</span>
             </div>
             <v-progress-linear
               v-model="power"
@@ -38,9 +45,10 @@
         <v-col
           cols="12"
           lg="4"
-          class="character-bg d-none d-lg-block"
+          class="d-none d-lg-block"
         >
           <img
+            class="character"
             src="@/assets/images/Character.png"
             alt="Character"
           >
@@ -69,11 +77,13 @@ export default {
 <style scoped>
 .character-bg {
   position: relative;
+  z-index: 2;
 }
 
-.character-bg img {
+.character-bg img.character {
   position: absolute;
-  top: -35px;
-  right: -38px;
+  bottom: -18px;
+  right: -19px;
+  z-index: 1;
 }
 </style>

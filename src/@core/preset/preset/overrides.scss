@@ -880,6 +880,23 @@ $btn-custom-heights: (
   background: linear-gradient(to bottom, #9c39d5, #8815dc, #00bff4);
 }
 
+::-webkit-scrollbar {
+  width: 5px !important;
+  border-radius: 4px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e4e4e4 !important;
+  border-radius: 4px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3e2580 !important;
+  border-radius: 4px !important;
+}
+
 .v-navigation-drawer ::-webkit-scrollbar {
   width: 5px !important;
   border-radius: 4px !important;
@@ -893,13 +910,17 @@ $btn-custom-heights: (
 
 /* Handle */
 .v-navigation-drawer ::-webkit-scrollbar-thumb {
-  background: #000000 !important;
+  background: #3e2580 !important;
   border-radius: 4px !important;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.grid-btn {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.lock-btn {
+  background: #472b90 !important;
 }
 
 // apex chart style overrides

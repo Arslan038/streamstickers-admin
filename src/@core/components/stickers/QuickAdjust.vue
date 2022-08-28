@@ -1,7 +1,7 @@
 <template>
-  <v-card height="265">
+  <v-card min-height="280">
     <v-card-text>
-      <h3 class="mb-3">
+      <h3 class="mb-3 fs--23 fw--500">
         Quick Adjust
       </h3>
       <v-row
@@ -23,6 +23,9 @@
           <v-slider
             v-model="stickiness"
             color="pink"
+            :min="0"
+            :max="10000"
+            thumb-label
             hide-details
           ></v-slider>
         </v-col>
@@ -42,6 +45,9 @@
         >
           <v-slider
             v-model="volume"
+            :min="0"
+            :max="10000"
+            thumb-label
             color="pink"
             hide-details
           ></v-slider>
@@ -65,11 +71,11 @@
                 color="secondary"
                 dark
                 v-bind="attrs"
-                class="px-15"
+                class="px-5 px-sm-15"
                 small
                 v-on="on"
               >
-                {{ bits }}
+                {{ bits }} <v-icon>{{ arrow }}</v-icon>
               </v-btn>
             </template>
             <v-list dense>
@@ -91,32 +97,36 @@
         no-gutters
       >
         <v-col
-          cols="4"
-          class=""
+          cols="12"
+          sm="4"
         >
           <v-btn
             depressed
             color="pink"
             block
+            class="grid-btn"
           >
             <span>Apply</span>
           </v-btn>
         </v-col>
         <v-col
-          cols="4"
-          class="px-2"
+          cols="12"
+          sm="4"
+          class="px-sm-2 my-2 my-sm-0"
         >
           <v-btn
             depressed
             color="pink"
             block
             outlined
+            class="grid-btn"
           >
             Enable All
           </v-btn>
         </v-col>
         <v-col
-          cols="4"
+          cols="12"
+          sm="4"
           class=""
         >
           <v-btn
@@ -124,6 +134,7 @@
             color="pink"
             block
             outlined
+            class="grid-btn"
           >
             Disable All
           </v-btn>
@@ -134,9 +145,12 @@
 </template>
 
 <script>
+import { mdiChevronDown } from '@mdi/js'
+
 export default {
   data() {
     return {
+      arrow: mdiChevronDown,
       stickiness: 50,
       volume: 50,
       bits: 100,
