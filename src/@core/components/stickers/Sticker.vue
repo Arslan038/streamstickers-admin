@@ -155,7 +155,7 @@
                 >
                   <template #default>
                     <div class="d-flex align-center">
-                      <span class="px-10">{{ bits }}</span>
+                      <span class="px-10 px-lg-5 px-xl-10">{{ bits }}</span>
                       <v-divider
                         vertical
                         class="mx-2"

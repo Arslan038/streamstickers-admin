@@ -1,6 +1,6 @@
 <template>
   <div class="app-customizer">
-    <v-btn
+    <!-- <v-btn
       icon
       class="app-customizer-toggler rounded-0"
       :class="$vuetify.rtl ? 'rounded-r-lg' : 'rounded-l-lg'"
@@ -11,7 +11,7 @@
       <v-icon size="25">
         {{ icons.mdiCog }}
       </v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-navigation-drawer
       v-model="isCustomizerOpen"
       :right="!$vuetify.rtl"
@@ -229,10 +229,10 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/composition-api'
 import useAppConfig from '@core/@app-config/useAppConfig'
+import { computed, ref } from '@vue/composition-api'
 
-import { mdiCog, mdiClose } from '@mdi/js'
+import { mdiClose, mdiCog } from '@mdi/js'
 
 import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 import themeVariants from './themeVariants'
