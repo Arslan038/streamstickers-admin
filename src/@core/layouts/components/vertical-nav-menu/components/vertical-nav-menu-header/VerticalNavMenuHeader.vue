@@ -34,8 +34,8 @@
       </v-slide-x-transition>
     </router-link> -->
 
-    <v-slide-x-transition>
-      <!-- <div
+    <!-- <v-slide-x-transition>
+      <div
         v-show="!(menuIsVerticalNavMini && !isMouseHovered)"
         v-if="$vuetify.breakpoint.lgAndUp"
         class="d-flex align-center ms-1"
@@ -63,8 +63,8 @@
         @click.stop="$emit('close-nav-menu')"
       >
         {{ icons.mdiClose }}
-      </v-icon> -->
-    </v-slide-x-transition>
+      </v-icon>
+    </v-slide-x-transition> -->
   </div>
 </template>
 

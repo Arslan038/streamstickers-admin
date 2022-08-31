@@ -10,14 +10,21 @@
       >
         <v-row
           align="center"
-          class="mt-3 mt-md-0"
         >
           <v-col
             cols="10"
             md="6"
             lg="7"
+            class="d-flex"
           >
-            <div class="news d-flex align-center">
+            <v-icon
+              v-if="$vuetify.breakpoint.mdAndDown"
+              class="me-3"
+              @click="toggleVerticalNavMenuActive"
+            >
+              {{ icons.mdiMenu }}
+            </v-icon>
+            <div class="news d-none d-md-flex align-center">
               <img
                 src="@/assets/images/notification_bell.png"
                 alt="Bell"
@@ -65,7 +72,7 @@
           </v-col>
         </v-row>
         <!-- Left Content: Search -->
-        <!-- <div class="d-flex align-center">
+        <!-- <div class="d-flex align-center left-row">
           <v-icon
             v-if="$vuetify.breakpoint.mdAndDown"
             class="me-3"
@@ -73,6 +80,18 @@
           >
             {{ icons.mdiMenu }}
           </v-icon>
+          <div class="news d-flex align-center">
+            <img
+              src="@/assets/images/notification_bell.png"
+              alt="Bell"
+              class="mr-2"
+            >
+            <strong class="text-sm">News: </strong>
+            <span class="pl-2 fs--14 fw--500 d-none d-xl-block">{{ news.substr(0,80) }}</span>
+            <span class="pl-2 fs--14 fw--500 d-none d-lg-block">{{ news.substr(0,50) }}</span>
+            <span class="pl-2 fs--14 fw--500 d-none d-md-block d-lg-none">{{ news.substr(0,40) }}</span>
+            <span class="pl-2 fs--14 fw--500 d-block d-md-none">{{ news.substr(0,30) }}</span>
+          </div>
           <app-bar-search
             :shall-show-full-search.sync="shallShowFullSearch"
             :data="appBarSearchData"
@@ -87,6 +106,22 @@
           <app-bar-i18n></app-bar-i18n>
           <app-bar-theme-switcher class="mx-4"></app-bar-theme-switcher>
           <app-bar-notification></app-bar-notification>
+          <v-btn
+            color="secondary"
+            outlined
+            depressed
+            class="px-md-10"
+          >
+            <span>Report Bugs</span>
+          </v-btn>
+          <v-btn
+            color="secondary"
+            class="mx-4"
+            outlined
+            depressed
+          >
+            <span>Share Feedback</span>
+          </v-btn>
           <app-bar-user-menu></app-bar-user-menu>
         </div> -->
       </div>
@@ -153,6 +188,8 @@ export default {
   setup() {
     const $vuetify = getVuetify()
 
+    const news = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacus lectus.'
+
     // Search
     const appBarSearchQuery = ref('')
     const shallShowFullSearch = ref(false)
@@ -201,6 +238,7 @@ export default {
     return {
       navMenuItems,
       handleShallShowFullSearchUpdate,
+      news,
 
       // Search
       appBarSearchQuery,
@@ -250,7 +288,13 @@ export default {
   }
 }
 
+.left-row {
+  width: 60%;
+  margin-right: 20px;
+}
+
 .news {
+  width: 100%;
   background: -webkit-linear-gradient(to right, #ff228d, #c64ba9, #7a71cc);
   background: -o-gradient(to right, #ff228d, #c64ba9, #7a71cc);
   background: -ms-gradient(to right, #ff228d, #c64ba9, #7a71cc);

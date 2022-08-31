@@ -1,5 +1,7 @@
 <template>
-  <v-card height="460">
+  <v-card
+    height="460"
+  >
     <v-card-text>
       <template v-if="sticker.uploaded && sticker.unlocked">
         <div
@@ -54,12 +56,17 @@
             class="text-right"
           >
             <v-slider
+              v-model="stickiness"
               color="pink"
               :min="0"
-              :max="10000"
+              :max="100"
               thumb-label
               hide-details
-            ></v-slider>
+            >
+              <template #thumb-label>
+                <span class="px-2">{{ stickiness }}%</span>
+              </template>
+            </v-slider>
           </v-col>
           <v-col
             cols="5"
@@ -75,12 +82,17 @@
             class="text-right"
           >
             <v-slider
+              v-model="vol"
               color="pink"
               :min="0"
-              :max="10000"
+              :max="100"
               thumb-label
               hide-details
-            ></v-slider>
+            >
+              <template #thumb-label>
+                <span class="px-2">{{ vol }}%</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
         <v-row
@@ -128,28 +140,44 @@
             md="8"
             class="text-right"
           >
-            <v-menu offset-y>
+            <v-menu
+              offset-y
+              class="bits-btn"
+            >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color="secondary"
+                  class="px-0"
+                  small
                   dark
                   v-bind="attrs"
-                  class="px-7 px-xl-15"
-                  small
                   v-on="on"
                 >
-                  {{ bits }} <v-icon>{{ arrow }}</v-icon>
+                  <template #default>
+                    <div class="d-flex align-center">
+                      <span class="px-10">{{ bits }}</span>
+                      <v-divider
+                        vertical
+                        class="mx-2"
+                      ></v-divider>
+                      <v-icon class="mr-2">
+                        {{ arrow }}
+                      </v-icon>
+                    </div>
+                  </template>
                 </v-btn>
               </template>
-              <v-list dense>
+              <v-list
+                dense
+                color="purple"
+                class="bits-dropdown"
+              >
                 <v-list-item
-                  v-for="item in bitList"
-                  :key="item"
-                  @click="bits = item"
+                  v-for="bit in bitList"
+                  :key="bit"
+                  @click="bits = bit"
                 >
-                  <v-list-item-title>
-                    {{ item }}
-                  </v-list-item-title>
+                  {{ bit }}
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -267,8 +295,8 @@
         <v-btn
           block
           depressed
-          color="purple"
-          class="py-7 text-normal"
+          color=""
+          class="py-7 text-normal lock-btn"
         >
           <div>
             <span class="grey--text">Unlocks at </span> <br>
@@ -304,7 +332,16 @@ export default {
       lock: mdiLock,
       drag: mdiDrag,
       bits: 100,
+      vol: 50,
+      stickiness: 50,
       bitList: [100, 150],
+      dropdown: false,
+    }
+  },
+  created() {
+    this.bitList = []
+    for (let i = 5; i <= 10000; i += 20) {
+      this.bitList.push(i)
     }
   },
 }
@@ -320,11 +357,21 @@ export default {
 
 .sticker-header {
   position: relative;
+  z-index: 0;
 }
 
 .sticker-header .drag-icon {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+.bits-btn {
+  position: relative;
+}
+
+.bits-dropdown {
+  height: 200px;
+  overflow-y: scroll;
 }
 </style>

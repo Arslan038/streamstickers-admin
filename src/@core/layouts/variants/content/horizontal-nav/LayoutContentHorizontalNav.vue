@@ -4,7 +4,7 @@
     :class="{'content-full': appContentWidth === 'full'}"
   >
     <!-- Navbar -->
-    <v-system-bar
+    <!-- <v-system-bar
       app
       height="64"
       :absolute="appBarType === 'static'"
@@ -12,15 +12,15 @@
       class="app-system-bar"
     >
       <slot name="navbar"></slot>
-    </v-system-bar>
+    </v-system-bar> -->
 
     <!-- Horizontal Nav Menu -->
-    <v-app-bar
+    <!-- <v-app-bar
       v-if="!menuIsMenuHidden"
-      class="navigation-menu"
+      class="purple"
       :class="{ 'bg-blur': appBarIsBlurred }"
       app
-      height="64"
+      min-height="64"
       :absolute="appBarType === 'static'"
       :elevation="$vuetify.theme.isDark ? 4 : 3"
     >
@@ -28,7 +28,7 @@
         :nav-menu-items="navMenuItems"
         :class="{'horizontal-nav-menu-boxed mx-auto': appContentWidth === 'boxed'}"
       ></horizontal-nav-menu>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <slot name="v-app-content"></slot>
 
@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import AppContentContainer from '@core/layouts/components/app-content-container/AppContentContainer.vue'
-import useAppConfig from '@core/@app-config/useAppConfig'
 import HorizontalNavMenu from '@/@core/layouts/components/horizontal-nav-menu/HorizontalNavMenu.vue'
+import useAppConfig from '@core/@app-config/useAppConfig'
+import AppContentContainer from '@core/layouts/components/app-content-container/AppContentContainer.vue'
 
 export default {
   components: {

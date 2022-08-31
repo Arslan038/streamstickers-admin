@@ -1,5 +1,7 @@
 <template>
-  <v-card min-height="280">
+  <v-card
+    class="quick-adjust"
+  >
     <v-card-text>
       <h3 class="mb-3 fs--23 fw--500">
         Quick Adjust
@@ -24,10 +26,14 @@
             v-model="stickiness"
             color="pink"
             :min="0"
-            :max="10000"
+            :max="100"
             thumb-label
             hide-details
-          ></v-slider>
+          >
+            <template #thumb-label>
+              <span class="px-2">{{ stickiness }}%</span>
+            </template>
+          </v-slider>
         </v-col>
         <v-col
           cols="5"
@@ -46,11 +52,15 @@
           <v-slider
             v-model="volume"
             :min="0"
-            :max="10000"
+            :max="100"
             thumb-label
             color="pink"
             hide-details
-          ></v-slider>
+          >
+            <template #thumb-label>
+              <span class="px-2">{{ volume }}%</span>
+            </template>
+          </v-slider>
         </v-col>
         <v-col
           cols="5"
@@ -65,31 +75,83 @@
           xl="9"
           class="pl-2"
         >
-          <v-menu offset-y>
+          <v-menu
+            offset-y
+            class="bits-btn"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 color="secondary"
+                class="px-0"
+                small
                 dark
                 v-bind="attrs"
-                class="px-5 px-sm-15"
-                small
                 v-on="on"
               >
-                {{ bits }} <v-icon>{{ arrow }}</v-icon>
+                <template #default>
+                  <div class="d-flex align-center">
+                    <span class="px-10">{{ bits }}</span>
+                    <v-divider
+                      vertical
+                      class="mx-2"
+                    ></v-divider>
+                    <v-icon class="mr-2">
+                      {{ arrow }}
+                    </v-icon>
+                  </div>
+                </template>
               </v-btn>
             </template>
-            <v-list dense>
+            <v-list
+              dense
+              color="purple"
+              class="bits-dropdown"
+            >
               <v-list-item
-                v-for="item in bitList"
-                :key="item"
-                @click="bits = item"
+                v-for="bit in bitList"
+                :key="bit"
+                @click="bits = bit"
               >
-                <v-list-item-title>
-                  {{ item }}
-                </v-list-item-title>
+                {{ bit }}
               </v-list-item>
             </v-list>
           </v-menu>
+          <!-- <v-btn
+            color="secondary"
+            class="bits-btn px-0"
+            dark
+            small
+            depressed
+            @click="dropdown = !dropdown"
+          >
+            <template #default>
+              <div class="d-flex align-center">
+                <span class="px-10">{{ bits }}</span>
+                <v-divider
+                  vertical
+                  class="mx-2"
+                ></v-divider>
+                <v-icon class="mr-2">
+                  {{ arrow }}
+                </v-icon>
+              </div>
+
+              <div
+                v-if="dropdown"
+                class="bits-dropdown purple"
+              >
+                <v-list dense>
+                  <v-list-item
+                    v-for="bit in bitList"
+                    :key="bit"
+                    @click="bits = bit"
+                  >
+                    {{ bit }}
+                  </v-list-item>
+                </v-list>
+              </div>
+            </template>
+          </v-btn> -->
         </v-col>
       </v-row>
       <v-row
@@ -154,8 +216,42 @@ export default {
       stickiness: 50,
       volume: 50,
       bits: 100,
-      bitList: [100, 150],
+      dropdown: false,
+      bitList: [],
+    }
+  },
+
+  created() {
+    this.bitList = []
+    for (let i = 5; i <= 10000; i += 20) {
+      this.bitList.push(i)
     }
   },
 }
 </script>
+
+<style scoped>
+.quick-adjust {
+  min-height: 280px !important;
+}
+@media screen and (max-width: 1364px) and (min-width: 1264px) {
+  .quick-adjust {
+    min-height: 290px !important;
+  }
+}
+
+@media screen and (max-width: 978px) and (min-width: 960px) {
+  .quick-adjust {
+    min-height: 290px !important;
+  }
+}
+
+.bits-btn {
+  position: relative;
+}
+
+.bits-dropdown {
+  height: 200px;
+  overflow-y: scroll;
+}
+</style>

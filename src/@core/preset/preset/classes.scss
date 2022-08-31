@@ -60,7 +60,8 @@
 
   @at-root {
     @include theme(bg-blur) using ($material) {
-      background-color: rgba(map-deep-get($material, 'cards'), 0.85) !important;
+      // background-color: rgba(map-deep-get($material, 'cards'), 0.85) !important;
+      background-color: #2a1953 !important;
     }
   }
 }

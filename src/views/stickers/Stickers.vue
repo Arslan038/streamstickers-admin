@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-sticker">
+  <div class="custom-sticker pb-10">
     <v-card>
       <v-card-text class="py-3">
         <h2 class="white--text fs--25 fw--700">
