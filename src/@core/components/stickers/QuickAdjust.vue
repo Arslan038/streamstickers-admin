@@ -155,7 +155,7 @@
         </v-col>
       </v-row>
       <v-row
-        class="mt-9"
+        class="mt-10"
         no-gutters
       >
         <v-col
@@ -234,9 +234,9 @@ export default {
 .quick-adjust {
   min-height: 280px !important;
 }
-@media screen and (max-width: 1364px) and (min-width: 1264px) {
+@media screen and (min-width: 1264px) {
   .quick-adjust {
-    min-height: 290px !important;
+    min-height: 287px !important;
   }
 }
 
